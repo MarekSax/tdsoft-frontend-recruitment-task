@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import { AppDataContext } from "../../contexts/AppData.context";
+import React, { useContext } from 'react';
+import { AppDataContext } from '../../contexts/AppData.context';
 import {
   CharacterWidgetContainer,
   CharacterStatusLabel,
-  CharacterAvatar
-} from "./CharacterWidget.styled";
+  CharacterAvatar,
+} from './CharacterWidget.styled';
 
 const CharacterWidget: React.FC = () => {
   const { character } = useContext(AppDataContext);
@@ -16,8 +16,8 @@ const CharacterWidget: React.FC = () => {
         <p>Name: {character.name}</p>
 
         <p>
-          Status:{" "}
-          <CharacterStatusLabel isAlive={character.status === "Alive"}>
+          Status:{' '}
+          <CharacterStatusLabel isAlive={character.status === 'Alive'}>
             {character.status}
           </CharacterStatusLabel>
         </p>
