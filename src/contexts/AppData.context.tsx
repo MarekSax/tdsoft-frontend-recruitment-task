@@ -9,11 +9,14 @@ import ky from 'ky';
 import { API_URL } from '../config';
 import type { Character } from '../types/RickAndMorty.types';
 
+type FetchStatus = 'idle' | 'loading' | 'success' | 'error';
 type AppData = {
-  isLoading: boolean;
+  fetchStatus: FetchStatus;
   character: {
     name: Character['name'];
+    gender: Character['gender'];
     status: Character['status'];
+    episodes: number;
     imageUrl: string;
   } | null;
   characterId: number | null;
@@ -22,7 +25,7 @@ type AppData = {
 };
 
 export const AppDataContext = createContext<AppData>({
-  isLoading: true,
+  fetchStatus: 'idle',
   character: null,
   characterId: null,
   incrementCharacterId: () => {},
@@ -32,27 +35,30 @@ export const AppDataContext = createContext<AppData>({
 export const AppDataContextProvider = ({
   children,
 }: React.PropsWithChildren) => {
-  const [isLoading, setIsLoading] = useState<AppData['isLoading']>(false);
+  const [fetchStatus, setFetchStatus] = useState<FetchStatus>('idle');
   const [characterData, setCharacterData] =
     useState<AppData['character']>(null);
   const [characterId, setCharacterId] = useState<number>(1);
 
   const fetchCharacterData = useCallback(async (id: number) => {
+    setFetchStatus('loading');
+
     try {
-      setIsLoading(true);
       const response: Character = await ky
         .get(`${API_URL}/character/${id}`)
         .json();
       const nextCharacterData: AppData['character'] = {
         name: response.name,
+        gender: response.gender,
         status: response.status,
+        episodes: response.episode.length,
         imageUrl: response.image,
       };
       setCharacterData(nextCharacterData);
+      setFetchStatus('success');
     } catch (error) {
+      setFetchStatus('error');
       console.error('Error fetching character data:', error);
-    } finally {
-      setIsLoading(false);
     }
   }, []);
 
@@ -70,14 +76,14 @@ export const AppDataContextProvider = ({
 
   const appData: AppData = useMemo(() => {
     return {
-      isLoading,
+      fetchStatus,
       character: characterData,
       characterId,
       incrementCharacterId,
       decrementCharacterId,
     };
   }, [
-    isLoading,
+    fetchStatus,
     characterData,
     characterId,
     incrementCharacterId,
