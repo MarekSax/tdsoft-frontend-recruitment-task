@@ -3,3 +3,4 @@ TODO.md
 .package-lock.json
 dist
 yarn.lock
+.DS_Store
