@@ -9,7 +9,12 @@ import ky from 'ky';
 import { API_URL } from '../config';
 import type { Character } from '../types/RickAndMorty.types';
 
-type FetchStatus = 'idle' | 'loading' | 'success' | 'error';
+export enum FetchStatus {
+  Idle = 'idle',
+  Loading = 'loading',
+  Success = 'success',
+  Error = 'error',
+}
 type AppData = {
   fetchStatus: FetchStatus;
   character: {
@@ -25,7 +30,7 @@ type AppData = {
 };
 
 export const AppDataContext = createContext<AppData>({
-  fetchStatus: 'idle',
+  fetchStatus: FetchStatus.Idle,
   character: null,
   characterId: null,
   incrementCharacterId: () => {},
@@ -35,13 +40,13 @@ export const AppDataContext = createContext<AppData>({
 export const AppDataContextProvider = ({
   children,
 }: React.PropsWithChildren) => {
-  const [fetchStatus, setFetchStatus] = useState<FetchStatus>('idle');
+  const [fetchStatus, setFetchStatus] = useState<FetchStatus>(FetchStatus.Idle);
   const [characterData, setCharacterData] =
     useState<AppData['character']>(null);
-  const [characterId, setCharacterId] = useState<number>(1);
+  const [characterId, setCharacterId] = useState<number>(242);
 
   const fetchCharacterData = useCallback(async (id: number) => {
-    setFetchStatus('loading');
+    setFetchStatus(FetchStatus.Loading);
 
     try {
       const response: Character = await ky
@@ -55,9 +60,9 @@ export const AppDataContextProvider = ({
         imageUrl: response.image,
       };
       setCharacterData(nextCharacterData);
-      setFetchStatus('success');
+      setFetchStatus(FetchStatus.Success);
     } catch (error) {
-      setFetchStatus('error');
+      setFetchStatus(FetchStatus.Error);
       console.error('Error fetching character data:', error);
     }
   }, []);

@@ -1,30 +1,72 @@
 import React, { useContext } from 'react';
-import { AppDataContext } from '../../contexts/AppData.context';
+import { AppDataContext, FetchStatus } from '../../contexts/AppData.context';
 import {
   CharacterWidgetContainer,
   CharacterStatusLabel,
   CharacterAvatar,
+  CharacterWidgetHeader,
+  CharacterWidgetContent,
+  Button,
+  StatusMessage,
+  ButtonContainer,
 } from './CharacterWidget.styled';
 
 const CharacterWidget: React.FC = () => {
-  const { character } = useContext(AppDataContext);
+  const {
+    character,
+    incrementCharacterId,
+    decrementCharacterId,
+    characterId,
+    fetchStatus,
+  } = useContext(AppDataContext);
+
+  const MIN_CHARACTER_ID = 1;
+  const MAX_CHARACTER_ID = 826;
 
   if (!character) return null;
   return (
-    <CharacterWidgetContainer>
-      <div>
-        <p>Name: {character.name}</p>
+    <>
+      <CharacterWidgetContainer>
+        {fetchStatus === FetchStatus.Loading && (
+          <StatusMessage>Loading...</StatusMessage>
+        )}
 
-        <p>
-          Status:{' '}
-          <CharacterStatusLabel isAlive={character.status === 'Alive'}>
-            {character.status}
-          </CharacterStatusLabel>
-        </p>
-      </div>
+        {fetchStatus === FetchStatus.Error && (
+          <StatusMessage>An error occured... try again later.</StatusMessage>
+        )}
 
-      <CharacterAvatar src={character.imageUrl} alt="Character avatar" />
-    </CharacterWidgetContainer>
+        {fetchStatus === FetchStatus.Success && (
+          <>
+            <CharacterWidgetHeader
+              status={character.status}
+              title={`status: ${character.status}`}
+            >
+              <p>{character.name}</p>
+            </CharacterWidgetHeader>
+            <CharacterWidgetContent>
+              <div>test</div>
+              <div>test</div>
+
+              <CharacterAvatar src={character.imageUrl} />
+            </CharacterWidgetContent>
+          </>
+        )}
+      </CharacterWidgetContainer>
+      <ButtonContainer>
+        <Button
+          onClick={decrementCharacterId}
+          disabled={(characterId ?? 0) <= MIN_CHARACTER_ID}
+        >
+          Previous
+        </Button>
+        <Button
+          onClick={incrementCharacterId}
+          disabled={(characterId ?? 0) >= MAX_CHARACTER_ID}
+        >
+          Next
+        </Button>
+      </ButtonContainer>
+    </>
   );
 };
 

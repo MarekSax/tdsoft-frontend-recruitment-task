@@ -1,24 +1,96 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
+import { colors } from '../../styles/colors';
+import { Character } from '../../types/RickAndMorty.types';
 
-export const CharacterWidgetContainer = styled.div`
+export const CharacterWidgetContainer = styled.article`
+  box-sizing: border-box;
   display: flex;
-  justify-content: space-evenly;
-  padding-top: 20px;
-  width: 300px;
-  height: 100px;
-  background-color: gainsboro;
-  border-radius: 4px;
-  border: 1px solid darkgray;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 360px;
+  height: 120px;
+  background-color: ${colors.grey6};
+  border: 1px solid ${colors.grey5};
+  border-radius: 8px;
+  overflow: hidden;
+`;
+
+export const CharacterWidgetHeader = styled.div<{
+  status: Character['status'];
+}>`
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 14px;
+  width: 100%;
+  background-color: ${(props) => {
+    switch (props.status) {
+      case 'Alive':
+        return colors.green;
+      case 'Dead':
+        return colors.red;
+      default:
+        return colors.grey5;
+    }
+  }};
+  padding: 8px 10px;
+`;
+
+export const CharacterWidgetContent = styled.div`
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px;
 `;
 
 export const CharacterStatusLabel = styled.span<{ isAlive: boolean }>`
-  color: ${(props) => (props.isAlive ? "green" : "red")};
+  color: ${(props) => (props.isAlive ? 'green' : 'red')};
 `;
 
 export const CharacterAvatar = styled.img`
-  box-sizing: border-box;
-  width: 76px;
-  height: 76px;
-  border-radius: 50%;
-  border: 2px solid hotpink;
+  width: 70px;
+  height: 70px;
+  border-radius: 4px;
+  object-fit: cover;
+  object-position: center;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+`;
+
+export const StatusMessage = styled.p`
+  font-weight: 600;
+  font-size: 11px;
+  color: ${colors.grey2};
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 18px;
+`;
+
+export const Button = styled.button`
+  width: 90px;
+  background-color: ${colors.grey6};
+  border: 1px solid ${colors.grey5};
+  border-radius: 4px;
+  padding: 7px;
+  color: ${colors.grey1};
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+
+  :disabled {
+    color: ${colors.grey3};
+  }
 `;

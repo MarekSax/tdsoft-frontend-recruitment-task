@@ -6,5 +6,5 @@ export const colors = {
   grey2: 'rgba(79, 79, 79, 1)',
   grey3: 'rgba(130, 130, 130, 1)',
   grey5: 'rgba(224, 224, 224, 1)',
-  grey6: 'rgba(238, 238, 238, 1)',
+  grey6: 'rgba(242, 242, 242, 1)',
 };
