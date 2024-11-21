@@ -109,7 +109,11 @@ export const Button = styled.button`
   font-weight: 700;
   font-size: 12px;
   line-height: 16px;
+  cursor: pointer;
 
+  :enabled:active {
+    background-color: ${colors.grey5};
+  }
   :disabled {
     color: ${colors.grey3};
   }
