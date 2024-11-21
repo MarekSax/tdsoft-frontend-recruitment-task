@@ -2,13 +2,16 @@ import React, { useContext } from 'react';
 import { AppDataContext, FetchStatus } from '../../contexts/AppData.context';
 import {
   CharacterWidgetContainer,
-  CharacterStatusLabel,
   CharacterAvatar,
   CharacterWidgetHeader,
   CharacterWidgetContent,
   Button,
   StatusMessage,
   ButtonContainer,
+  CharacterInfoLabel,
+  CharacterInfo,
+  CharacterInfoItem,
+  CharacterInfoText,
 } from './CharacterWidget.styled';
 
 const CharacterWidget: React.FC = () => {
@@ -44,8 +47,24 @@ const CharacterWidget: React.FC = () => {
               <p>{character.name}</p>
             </CharacterWidgetHeader>
             <CharacterWidgetContent>
-              <div>test</div>
-              <div>test</div>
+              <CharacterInfo>
+                <CharacterInfoItem>
+                  <CharacterInfoLabel>id</CharacterInfoLabel>
+                  <CharacterInfoText>{`#${characterId}`}</CharacterInfoText>
+                </CharacterInfoItem>
+                <CharacterInfoItem>
+                  <CharacterInfoLabel>status</CharacterInfoLabel>
+                  <CharacterInfoText>{character.status}</CharacterInfoText>
+                </CharacterInfoItem>
+                <CharacterInfoItem>
+                  <CharacterInfoLabel>gender</CharacterInfoLabel>
+                  <CharacterInfoText>{character.gender}</CharacterInfoText>
+                </CharacterInfoItem>
+                <CharacterInfoItem>
+                  <CharacterInfoLabel>episodes</CharacterInfoLabel>
+                  <CharacterInfoText>{character.episodes}</CharacterInfoText>
+                </CharacterInfoItem>
+              </CharacterInfo>
 
               <CharacterAvatar src={character.imageUrl} />
             </CharacterWidgetContent>

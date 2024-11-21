@@ -3,7 +3,6 @@ import { colors } from '../../styles/colors';
 import { Character } from '../../types/RickAndMorty.types';
 
 export const CharacterWidgetContainer = styled.article`
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,7 +18,6 @@ export const CharacterWidgetContainer = styled.article`
 export const CharacterWidgetHeader = styled.div<{
   status: Character['status'];
 }>`
-  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -41,19 +39,41 @@ export const CharacterWidgetHeader = styled.div<{
 `;
 
 export const CharacterWidgetContent = styled.div`
-  box-sizing: border-box;
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
   padding: 10px;
 `;
 
-export const CharacterStatusLabel = styled.span<{ isAlive: boolean }>`
-  color: ${(props) => (props.isAlive ? 'green' : 'red')};
+export const CharacterInfo = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 133px);
+  gap: 8px 4px;
+`;
+
+export const CharacterInfoItem = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+`;
+
+export const CharacterInfoLabel = styled.p`
+  background: ${colors.blue};
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 11px;
+  color: ${colors.grey1};
+  padding: 1px 4px;
+`;
+
+export const CharacterInfoText = styled.p`
+  font-weight: 600;
+  font-size: 11px;
+  color: ${colors.grey1};
 `;
 
 export const CharacterAvatar = styled.img`

@@ -43,7 +43,7 @@ export const AppDataContextProvider = ({
   const [fetchStatus, setFetchStatus] = useState<FetchStatus>(FetchStatus.Idle);
   const [characterData, setCharacterData] =
     useState<AppData['character']>(null);
-  const [characterId, setCharacterId] = useState<number>(242);
+  const [characterId, setCharacterId] = useState<number>(1);
 
   const fetchCharacterData = useCallback(async (id: number) => {
     setFetchStatus(FetchStatus.Loading);
