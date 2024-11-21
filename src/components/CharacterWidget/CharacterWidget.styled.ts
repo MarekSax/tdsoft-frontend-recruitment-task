@@ -35,8 +35,7 @@ export const CharacterWidgetHeader = styled.div<{
         return colors.grey5;
     }
   }};
-  padding: 8px 10px;
-  margin-bottom: 1px;
+  padding: 7px 9px 8px;
 `;
 
 export const CharacterWidgetContent = styled.div`
@@ -46,7 +45,7 @@ export const CharacterWidgetContent = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 9px;
+  padding: 10px 9px 9px;
 `;
 
 export const CharacterInfo = styled.div`
