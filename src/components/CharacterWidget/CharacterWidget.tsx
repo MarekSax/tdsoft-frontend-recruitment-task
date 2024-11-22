@@ -25,6 +25,13 @@ const CharacterWidget: React.FC = () => {
   const MIN_CHARACTER_ID = 1;
   const MAX_CHARACTER_ID = 826;
 
+  const characterInfo = [
+    { label: 'id', value: `#${characterId}` },
+    { label: 'status', value: character?.status },
+    { label: 'gender', value: character?.gender },
+    { label: 'episodes', value: character?.episodes },
+  ];
+
   if (!character) return null;
   return (
     <>
@@ -47,22 +54,12 @@ const CharacterWidget: React.FC = () => {
             </CharacterWidgetHeader>
             <CharacterWidgetContent>
               <CharacterInfo>
-                <CharacterInfoItem>
-                  <CharacterInfoLabel>id</CharacterInfoLabel>
-                  <CharacterInfoText>{`#${characterId}`}</CharacterInfoText>
-                </CharacterInfoItem>
-                <CharacterInfoItem>
-                  <CharacterInfoLabel>status</CharacterInfoLabel>
-                  <CharacterInfoText>{character.status}</CharacterInfoText>
-                </CharacterInfoItem>
-                <CharacterInfoItem>
-                  <CharacterInfoLabel>gender</CharacterInfoLabel>
-                  <CharacterInfoText>{character.gender}</CharacterInfoText>
-                </CharacterInfoItem>
-                <CharacterInfoItem>
-                  <CharacterInfoLabel>episodes</CharacterInfoLabel>
-                  <CharacterInfoText>{character.episodes}</CharacterInfoText>
-                </CharacterInfoItem>
+                {characterInfo.map(({ label, value }) => (
+                  <CharacterInfoItem key={label}>
+                    <CharacterInfoLabel>{label}</CharacterInfoLabel>
+                    <CharacterInfoText>{value}</CharacterInfoText>
+                  </CharacterInfoItem>
+                ))}
               </CharacterInfo>
 
               <CharacterAvatar src={character.imageUrl} />

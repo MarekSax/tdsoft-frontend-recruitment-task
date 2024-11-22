@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { colors } from '../../styles/colors';
+import { COLORS } from '../../styles/colors';
 import { Character } from '../../types/RickAndMorty.types';
 
 export const CharacterWidgetContainer = styled.article`
@@ -9,8 +9,8 @@ export const CharacterWidgetContainer = styled.article`
   justify-content: center;
   width: 360px;
   height: 120px;
-  background-color: ${colors.grey6};
-  border: 1px solid ${colors.grey5};
+  background-color: ${COLORS.grey6};
+  border: 1px solid ${COLORS.grey5};
   border-radius: 8px;
   overflow: hidden;
 `;
@@ -28,11 +28,11 @@ export const CharacterWidgetHeader = styled.div<{
   background-color: ${(props) => {
     switch (props.status) {
       case 'Alive':
-        return colors.green;
+        return COLORS.green;
       case 'Dead':
-        return colors.red;
+        return COLORS.red;
       default:
-        return colors.grey5;
+        return COLORS.grey5;
     }
   }};
   padding: 7px 9px 8px;
@@ -62,18 +62,18 @@ export const CharacterInfoItem = styled.div`
 `;
 
 export const CharacterInfoLabel = styled.p`
-  background: ${colors.blue};
+  background: ${COLORS.blue};
   border-radius: 4px;
   font-weight: 600;
   font-size: 11px;
-  color: ${colors.grey1};
+  color: ${COLORS.grey1};
   padding: 1px 4px;
 `;
 
 export const CharacterInfoText = styled.p`
   font-weight: 600;
   font-size: 11px;
-  color: ${colors.grey1};
+  color: ${COLORS.grey1};
 `;
 
 export const CharacterAvatar = styled.img`
@@ -88,7 +88,7 @@ export const CharacterAvatar = styled.img`
 export const StatusMessage = styled.p`
   font-weight: 600;
   font-size: 11px;
-  color: ${colors.grey2};
+  color: ${COLORS.grey2};
 `;
 
 export const ButtonContainer = styled.div`
@@ -101,20 +101,20 @@ export const ButtonContainer = styled.div`
 
 export const Button = styled.button`
   width: 90px;
-  background-color: ${colors.grey6};
-  border: 1px solid ${colors.grey5};
+  background-color: ${COLORS.grey6};
+  border: 1px solid ${COLORS.grey5};
   border-radius: 4px;
   padding: 7px;
-  color: ${colors.grey1};
+  color: ${COLORS.grey1};
   font-weight: 700;
   font-size: 12px;
   line-height: 16px;
   cursor: pointer;
 
   :enabled:active {
-    background-color: ${colors.grey5};
+    background-color: ${COLORS.grey5};
   }
   :disabled {
-    color: ${colors.grey3};
+    color: ${COLORS.grey3};
   }
 `;
