@@ -25,14 +25,14 @@ const CharacterWidget: React.FC = () => {
   const MIN_CHARACTER_ID = 1;
   const MAX_CHARACTER_ID = 826;
 
+  if (!character) return null;
+
   const characterInfo = [
     { label: 'id', value: `#${characterId}` },
-    { label: 'status', value: character?.status },
-    { label: 'gender', value: character?.gender },
-    { label: 'episodes', value: character?.episodes },
+    { label: 'status', value: character.status },
+    { label: 'gender', value: character.gender },
+    { label: 'episodes', value: character.episodes },
   ];
-
-  if (!character) return null;
   return (
     <>
       <CharacterWidgetContainer>
