@@ -1,4 +1,4 @@
-export const colors = {
+export const COLORS = {
   blue: 'rgba(178, 208, 235, 1)',
   green: 'rgba(135, 199, 64, 0.15)',
   red: 'rgba(235, 87, 87, 0.15)',
@@ -7,4 +7,4 @@ export const colors = {
   grey3: 'rgba(130, 130, 130, 1)',
   grey5: 'rgba(224, 224, 224, 1)',
   grey6: 'rgba(242, 242, 242, 1)',
-};
+} as const;
