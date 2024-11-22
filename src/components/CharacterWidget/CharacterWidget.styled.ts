@@ -7,6 +7,8 @@ export const CharacterWidgetContainer = styled.article`
   max-width: 360px;
   min-width: max-content;
   width: 100%;
+  min-height: 120px;
+
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -82,8 +84,10 @@ export const CharacterInfoText = styled.p`
 `;
 
 export const CharacterAvatar = styled.img`
-  width: 70px;
-  height: 70px;
+  max-width: 70px;
+  width: 100%;
+  max-height: 70px;
+  height: 100%;
   border-radius: 4px;
   object-fit: cover;
   object-position: center;
