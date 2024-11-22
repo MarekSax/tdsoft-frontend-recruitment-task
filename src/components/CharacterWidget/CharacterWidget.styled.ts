@@ -4,11 +4,12 @@ import { Character } from '../../types/RickAndMorty.types';
 
 export const CharacterWidgetContainer = styled.article`
   display: flex;
+  max-width: 360px;
+  min-width: max-content;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 360px;
-  height: 120px;
   background-color: ${COLORS.grey6};
   border: 1px solid ${COLORS.grey5};
   border-radius: 8px;
