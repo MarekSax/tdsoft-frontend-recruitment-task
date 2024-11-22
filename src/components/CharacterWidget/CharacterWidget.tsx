@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { AppDataContext, FetchStatus } from '../../contexts/AppData.context';
+import { FetchStatus, useAppDataContext } from '../../contexts/AppData.context';
 import {
   CharacterWidgetContainer,
   CharacterAvatar,
@@ -21,7 +20,7 @@ const CharacterWidget: React.FC = () => {
     decrementCharacterId,
     characterId,
     fetchStatus,
-  } = useContext(AppDataContext);
+  } = useAppDataContext();
 
   const MIN_CHARACTER_ID = 1;
   const MAX_CHARACTER_ID = 826;

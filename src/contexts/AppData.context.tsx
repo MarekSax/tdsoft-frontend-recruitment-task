@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useMemo,
   useCallback,
+  useContext,
 } from 'react';
 import ky from 'ky';
 import { API_URL } from '../config';
@@ -29,13 +30,7 @@ type AppData = {
   decrementCharacterId: () => void;
 };
 
-export const AppDataContext = createContext<AppData>({
-  fetchStatus: FetchStatus.Idle,
-  character: null,
-  characterId: null,
-  incrementCharacterId: () => {},
-  decrementCharacterId: () => {},
-});
+export const AppDataContext = createContext<AppData | null>(null);
 
 export const AppDataContextProvider = ({
   children,
@@ -100,4 +95,16 @@ export const AppDataContextProvider = ({
       {children}
     </AppDataContext.Provider>
   );
+};
+
+export const useAppDataContext = () => {
+  const context = useContext(AppDataContext);
+
+  if (!context) {
+    throw new Error(
+      'useAppDataContext must be used within a AppDataContextProvider'
+    );
+  }
+
+  return context;
 };
