@@ -50,7 +50,8 @@ export const CharacterWidgetContent = styled.div`
 
 export const CharacterInfo = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 133px);
+  width: 100%;
+  grid-template-columns: repeat(2, 1fr);
   gap: 8px 4px;
 `;
 
