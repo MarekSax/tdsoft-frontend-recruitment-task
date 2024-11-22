@@ -21,9 +21,6 @@ export const CharacterWidgetHeader = styled.div<{
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  font-weight: 700;
-  font-size: 11px;
-  line-height: 14px;
   width: 100%;
   background-color: ${(props) => {
     switch (props.status) {
@@ -36,6 +33,12 @@ export const CharacterWidgetHeader = styled.div<{
     }
   }};
   padding: 7px 9px 8px;
+`;
+
+export const CharacterWidgetTitle = styled.h2`
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 14px;
 `;
 
 export const CharacterWidgetContent = styled.div`

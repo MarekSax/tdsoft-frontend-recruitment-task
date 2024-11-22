@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { FetchStatus, useAppDataContext } from '../../contexts/AppData.context';
 import {
   CharacterWidgetContainer,
@@ -11,6 +12,7 @@ import {
   CharacterInfo,
   CharacterInfoItem,
   CharacterInfoText,
+  CharacterWidgetTitle,
 } from './CharacterWidget.styled';
 
 const CharacterWidget: React.FC = () => {
@@ -25,6 +27,14 @@ const CharacterWidget: React.FC = () => {
   const MIN_CHARACTER_ID = 1;
   const MAX_CHARACTER_ID = 826;
 
+  const errorRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    if (fetchStatus === FetchStatus.Error && errorRef.current) {
+      errorRef.current.focus();
+    }
+  }, [fetchStatus]);
+
   if (!character) return null;
 
   const characterInfo = [
@@ -37,11 +47,20 @@ const CharacterWidget: React.FC = () => {
     <>
       <CharacterWidgetContainer>
         {fetchStatus === FetchStatus.Loading && (
-          <StatusMessage>Loading...</StatusMessage>
+          <StatusMessage role="status" aria-live="polite">
+            Loading...
+          </StatusMessage>
         )}
 
         {fetchStatus === FetchStatus.Error && (
-          <StatusMessage>An error occured... try again later.</StatusMessage>
+          <StatusMessage
+            role="alert"
+            aria-live="assertive"
+            ref={errorRef}
+            tabIndex={-1}
+          >
+            An error occured... try again later.
+          </StatusMessage>
         )}
 
         {fetchStatus === FetchStatus.Success && (
@@ -50,7 +69,7 @@ const CharacterWidget: React.FC = () => {
               status={character.status}
               title={`status: ${character.status}`}
             >
-              <p>{character.name}</p>
+              <CharacterWidgetTitle>{character.name}</CharacterWidgetTitle>
             </CharacterWidgetHeader>
             <CharacterWidgetContent>
               <CharacterInfo>
@@ -62,7 +81,10 @@ const CharacterWidget: React.FC = () => {
                 ))}
               </CharacterInfo>
 
-              <CharacterAvatar src={character.imageUrl} />
+              <CharacterAvatar
+                src={character.imageUrl}
+                alt={`Image of ${character.name}`}
+              />
             </CharacterWidgetContent>
           </>
         )}
@@ -71,12 +93,16 @@ const CharacterWidget: React.FC = () => {
         <Button
           onClick={decrementCharacterId}
           disabled={(characterId ?? 0) <= MIN_CHARACTER_ID}
+          aria-disabled={(characterId ?? 0) <= MIN_CHARACTER_ID}
+          aria-label="Previous character"
         >
           Previous
         </Button>
         <Button
           onClick={incrementCharacterId}
           disabled={(characterId ?? 0) >= MAX_CHARACTER_ID}
+          aria-disabled={(characterId ?? 0) >= MAX_CHARACTER_ID}
+          aria-label="Next character"
         >
           Next
         </Button>
