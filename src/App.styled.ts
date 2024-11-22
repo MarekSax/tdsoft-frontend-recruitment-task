@@ -6,5 +6,5 @@ export const AppContainer = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
 `;
